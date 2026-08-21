@@ -27,4 +27,4 @@ A full-stack file storage application built with Node.js and Express as part of 
 
 ## Live Demo
 
-[File Uploader Live Demo](https://www.theodinproject.com/lessons/nodejs-file-uploader).
+[File Uploader Live Demo](https://file-uploader-odin-0ond.onrender.com/signup).
