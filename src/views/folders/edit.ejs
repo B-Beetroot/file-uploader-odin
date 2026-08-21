@@ -1,0 +1,34 @@
+  <div class="folder-edit-page">
+
+    <h1>Edit Folder Name</h1>
+
+    <form
+      action="/folders/<%= folder.id %>/edit"
+      method="POST"
+    >
+      <div class="form-group">
+        <label for="name">Folder name</label>
+
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="<%= folder.name %>"
+          required
+          autofocus
+        >
+      </div>
+
+      <button type="submit">
+        Save
+      </button>
+
+      <a
+        href="/folders/<%= folder.id %>"
+        class="button"
+      >
+        Cancel
+      </a>
+    </form>
+
+  </div>

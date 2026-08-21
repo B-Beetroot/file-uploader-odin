@@ -1,0 +1,153 @@
+<div class="file-page">
+
+  <header class="file-header">
+
+    <div class="file-title">
+
+      <h1>
+        
+      <a href="/folders/<%= file.folderId %>">
+        <%= file.folder.name %>
+      </a> / <%= file.originalName %>
+      </h1>
+
+      <p class="text-muted">
+        <%= file.mimeType %>
+      </p>
+
+    </div>
+
+    <div class="file-actions">
+
+      <a
+        href="/files/<%= file.id %>/download"
+        class="button button-primary"
+      >
+        Download
+      </a>
+
+
+      <form
+        action="/files/<%= file.id %>/delete"
+        method="POST"
+        onsubmit="return confirm('Delete this file?')"
+      >
+
+        <button
+          type="submit"
+          class="button button-danger"
+        >
+          Delete
+        </button>
+
+      </form>
+
+    </div>
+
+  </header>
+
+
+  <section class="file-details card">
+
+    <div class="file-detail">
+
+      <span class="file-detail-label">
+        Size
+      </span>
+
+      <strong>
+      <%= (file.size / 1024 / 1024).toFixed(2) %> MB
+
+      </strong>
+
+    </div>
+
+
+    <div class="file-detail">
+
+      <span class="file-detail-label">
+        Type
+      </span>
+
+      <strong>
+        <%= file.mimeType %>
+      </strong>
+
+    </div>
+
+
+    <div class="file-detail">
+
+      <span class="file-detail-label">
+        Uploaded
+      </span>
+
+      <strong>
+        <%= file.createdAt.toLocaleString("en-GB") %>
+
+      </strong>
+
+    </div>
+
+  </section>
+
+
+  <section class="file-preview-section">
+
+    <div class="section-header">
+
+      <h2>
+        Preview
+      </h2>
+
+    </div>
+
+
+    <div class="file-preview">
+
+      <% if (file.mimeType.startsWith("image/")) { %>
+
+        <img
+          src="<%= file.url %>"
+          alt="<%= file.originalName %>"
+          class="file-preview-image"
+        >
+
+
+      <% } else if (file.mimeType === "application/pdf") { %>
+
+        <iframe
+          src="<%= file.url %>"
+          class="file-preview-pdf"
+          title="Preview of <%= file.originalName %>"
+        ></iframe>
+
+
+      <% } else { %>
+
+        <div class="preview-unavailable">
+
+          <div class="empty-icon">
+            📄
+          </div>
+
+          <h3>
+            Preview unavailable
+          </h3>
+
+          <p class="text-muted">
+            Preview is not available for this file type.
+            Download the file to view its contents.
+          </p>
+
+        </div>
+
+      <% } %>
+
+    </div>
+
+  </section>
+
+  </div>
+
+</div>

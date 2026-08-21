@@ -1,0 +1,31 @@
+<header>
+  <nav>
+    <div class="container">
+
+  <a href="/" class="nav-brand">
+    File Uploader
+  </a>
+
+  <div class="nav-links">
+
+    <% if (user) { %>
+
+      <span class="nav-user "><%= user.username %></span>
+
+      <form action="/logout" method="POST">
+        <button type="submit">Log out</button>
+      </form>
+
+    <% } else { %>
+
+      <a href="/login">Log in</a>
+      <a href="/signup">Sign up</a>
+
+    <% } %>
+
+  </div>
+
+</div>
+
+  </nav>
+</header>

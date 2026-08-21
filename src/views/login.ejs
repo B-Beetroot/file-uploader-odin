@@ -1,0 +1,66 @@
+<div class="login-page">
+
+  <div class="auth-header">
+    <h1>Log In</h1>
+
+    <p class="text-muted">
+      Sign in to access your files and folders.
+    </p>
+  </div>
+
+    <% if (success) { %>
+    <p class="form-success"><%= success %></p>
+  <% } %>
+
+  <% if (error) { %>
+    <p class="form-error"><%= error %></p>
+  <% } %>
+
+  <form action="/login" method="POST">
+
+    <div class="form-group">
+      <label for="username">
+        Username
+      </label>
+
+      <input
+        type="text"
+        id="username"
+        name="username"
+        autocomplete="username"
+        required
+      >
+    </div>
+
+
+    <div class="form-group">
+      <label for="password">
+        Password
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        name="password"
+        autocomplete="current-password"
+        required
+      >
+    </div>
+
+
+    <button
+      type="submit"
+      class="button-primary auth-submit"
+    >
+      Log In
+    </button>
+
+  </form>
+
+
+  <p class="auth-footer">
+    Don't have an account?
+    <a href="/signup">Sign up</a>
+  </p>
+
+</div>

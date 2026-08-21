@@ -1,0 +1,217 @@
+<%
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return "0 Bytes";
+
+    const units = ["Bytes", "KB", "MB", "GB"];
+    const index = Math.floor(Math.log(bytes) / Math.log(1024));
+
+    return `${(bytes / Math.pow(1024, index)).toFixed(1)} ${units[index]}`;
+  };
+%>
+
+<div class="folder-page">
+
+  <header class="folder-header">
+    <div>
+      <h1><%= folder.name %></h1>
+
+      <p class="text-muted">
+        <%= folder.files.length %>
+        <%= folder.files.length === 1 ? "file" : "files" %>
+      </p>
+    </div>
+
+    <div class="folder-actions">
+      <a
+        href="/folders/<%= folder.id %>/edit"
+        class="button"
+      >
+        Edit
+      </a>
+
+<form
+  action="/folders/<%= folder.id %>/delete"
+  method="POST"
+  onsubmit="
+    if (!confirm('Delete this folder?')) {
+      return false;
+    }
+
+    const button = this.querySelector('button[type=submit]');
+    button.disabled = true;
+    button.textContent = 'Deleting...';
+
+    return true;
+  "
+>
+  <button
+    type="submit"
+    class="button-danger"
+  >
+    Delete
+  </button>
+</form>
+    </div>
+  </header>
+
+  <section class="upload-form">
+
+    <div class="upload-header">
+      <div>
+        <h2>Upload file</h2>
+
+        <p class="text-muted">
+          JPEG, PNG, GIF, PDF or TXT.
+          Maximum size: 5 MB.
+        </p>
+      </div>
+    </div>
+
+    <form
+      action="/folders/<%= folder.id %>/files"
+      method="POST"
+      enctype="multipart/form-data"
+      class="upload-controls"
+      onsubmit="
+        const button = this.querySelector('button[type=submit]');
+        button.disabled = true;
+        button.textContent = 'Uploading...';
+      "
+    >
+      <input
+        type="file"
+        name="file"
+        required
+      >
+
+      <button
+        type="submit"
+        class="button-primary"
+      >
+        Upload
+      </button>
+    </form>
+
+  </section>
+
+
+
+  <section class="folder-files">
+
+    <div class="section-header">
+      <h2>Files</h2>
+    </div>
+
+    <% if (folder.files.length === 0) { %>
+
+
+      <div class="empty-state card">
+
+        <div class="empty-icon">
+          📄
+        </div>
+
+        <h3>No files yet</h3>
+
+        <p class="text-muted">
+          Upload a file above to get started.
+        </p>
+
+      </div>
+
+    <% } else { %>
+
+  
+      <div class="file-list">
+
+        <% folder.files.forEach(file => { %>
+
+          <article class="file-card">
+
+            <div class="file-info">
+
+              <h3 title="<%= file.originalName %>">
+                <a
+                href="/files/<%= file.id %>"
+              
+              >  <%= file.originalName %> </a>
+              </h3>
+
+              <div class="file-meta">
+
+                <p>
+                  <span>Type</span>
+
+                  <strong title="<%= file.mimeType %>">
+                    <%= file.mimeType %>
+                  </strong>
+                </p>
+
+                <p>
+                  <span>Size</span>
+
+                  <strong>
+                    <%= formatFileSize(file.size) %>
+                  </strong>
+                </p>
+
+                <p class="file-date">
+                  <span>Added</span>
+
+                  <strong>
+                    <%= file.createdAt.toLocaleString("en-GB") %>
+                  </strong>
+                </p>
+
+              </div>
+
+            </div>
+
+
+    
+            <div class="file-actions">
+
+
+              <a
+                href="/files/<%= file.id %>/download"
+                class="button"
+              >
+                Download
+              </a>
+
+<form
+  action="/files/<%= file.id %>/delete"
+  method="POST"
+  onsubmit="
+    if (!confirm('Delete this file?')) {
+      return false;
+    }
+
+    const button = this.querySelector('button[type=submit]');
+    button.disabled = true;
+    button.textContent = 'Deleting...';
+
+    return true;
+  "
+>
+  <button
+    type="submit"
+    class="button-danger"
+  >
+    Delete
+  </button>
+</form>
+
+            </div>
+
+          </article>
+
+        <% }) %>
+
+      </div>
+
+    <% } %>
+
+  </section>
+
+</div>

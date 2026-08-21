@@ -1,0 +1,77 @@
+<div class="folders-page">
+
+  <header class="page-header">
+    <div>
+      <h1>Folders</h1>
+      <p class="text-muted">Keep your files organized.</p>
+    </div>
+
+    <form action="/folders" method="POST" class="create-form">
+
+      
+      <input
+        type="text"
+        name="name"
+        placeholder="New folder name"
+        autocomplete="off"
+        required
+      >
+      <button type="submit" class="button button-primary">
+        + Create
+      </button>
+    </form>
+  </header>
+
+
+  <% if (!folders.length) { %>
+
+    <div class="empty-state card">
+      <div class="empty-icon">📁</div>
+      <h2>Nothing here yet</h2>
+      <p class="text-muted">
+        Create a folder to start organizing your files.
+      </p>
+    </div>
+
+  <% } else { %>
+
+    <div class="folder-grid">
+
+      <% folders.forEach(folder => { %>
+
+        <article class="folder-card">
+
+          <a href="/folders/<%= folder.id %>" class="folder-link">
+            <span class="folder-icon">📁</span>
+
+            <div class="folder-info">
+              <h3><%= folder.name %></h3>
+              <span class="text-muted">View files →</span>
+            </div>
+          </a>
+
+          <div class="folder-menu">
+            <a href="/folders/<%= folder.id %>/edit" title="Rename">
+              Edit
+            </a>
+
+            <form
+              action="/folders/<%= folder.id %>/delete"
+              method="POST"
+              onsubmit="return confirm('Delete this folder?')"
+            >
+              <button type="submit" title="Delete">
+                Delete
+              </button>
+            </form>
+          </div>
+
+        </article>
+
+      <% }) %>
+
+    </div>
+
+  <% } %>
+
+</div>

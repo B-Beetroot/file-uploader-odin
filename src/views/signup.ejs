@@ -1,0 +1,74 @@
+<div class="signup-page">
+
+  <div class="auth-header">
+    <h1>Sign Up</h1>
+
+    <p class="text-muted">
+      Create an account to start managing your files and folders.
+    </p>
+  </div>
+
+  <% if (error) { %>
+    <p class="form-error"><%= error %></p>
+  <% } %>
+
+  <form action="/signup" method="POST">
+
+    <div class="form-group">
+      <label for="username">
+        Username
+      </label>
+
+      <input
+        type="text"
+        id="username"
+        name="username"
+        autocomplete="username"
+        value="<%= username || '' %>"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="password">
+        Password
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        name="password"
+        autocomplete="new-password"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+  <label for="confirmPassword">
+    Confirm password
+  </label>
+
+  <input
+    type="password"
+    id="confirmPassword"
+    name="confirmPassword"
+    autocomplete="new-password"
+    required
+  >
+</div>
+
+    <button
+      type="submit"
+      class="button-primary auth-submit"
+    >
+      Sign Up
+    </button>
+
+  </form>
+
+  <p class="auth-footer">
+    Already have an account?
+    <a href="/login">Log in</a>
+  </p>
+
+</div>
