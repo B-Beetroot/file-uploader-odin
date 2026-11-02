@@ -2,7 +2,7 @@
   "name": "file-uploader-odin",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
@@ -32,12 +32,13 @@
     "prisma": "^7.9.1"
   },
   "overrides": {
+    "minimatch": "^11.0.1",
     "@prisma/config": {
       "deepmerge-ts": "^8.0.1"
     }
   },
   "allowScripts": {
-    "@prisma/engines@7.9.1": true,
-    "prisma@7.9.1": true
+    "@prisma/engines@7.10.1": true,
+    "prisma@7.10.1": true
   }
 }
